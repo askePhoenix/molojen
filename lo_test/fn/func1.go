@@ -2,6 +2,7 @@ package fn
 
 import "fmt"
 
+// FuncMultiple2 i 곱하기 2를 출력
 func FuncMultiple2(i, _ int) int {
 	return i * 2
 }
