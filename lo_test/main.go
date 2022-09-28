@@ -14,10 +14,10 @@ func (i IntArray) ForEach(f FuncIntArrayConsumer) { lo.ForEach[int](i, f) }
 func (i IntArray) ToStringList() StringArray      { return lo.Map[int, string](i, fn.IntToString) }
 
 type StringArray []string
-type FuncStringArray func(string, int) int
+type FuncStringArray func(string, int) string
 type FuncStringArrayConsumer func(string, int)
 
-func (i StringArray) Map(f FuncStringArray) StringArray { return lo.Map[string, int](i, f) }
+func (i StringArray) Map(f FuncStringArray) StringArray { return lo.Map[string, string](i, f) }
 func (i StringArray) ForEach(f FuncStringArrayConsumer) { lo.ForEach[string](i, f) }
 
 func main() {
@@ -26,5 +26,6 @@ func main() {
 		Map(fn.FuncMultiple2).
 		Map(fn.FuncMultiple2).
 		ToStringList().
+		Map(fn.Concat).
 		ForEach(fn.FuncPrintString)
 }
