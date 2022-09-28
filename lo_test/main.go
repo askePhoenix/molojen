@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"github.com/askePhoenix/molojen/lo_test/fn"
 	"github.com/samber/lo"
 )
 
@@ -14,22 +14,26 @@ func (i IntArray) Map(f FuncIntArray) IntArray {
 	return lo.Map[int, int](i, f)
 }
 
+type StringArray []string
+type FuncStringArrayConsumer func(string, int)
+
+func (i IntArray) ToStringList() StringArray {
+	return lo.Map[int, string](i, fn.IntToString)
+}
+
 func (i IntArray) ForEach(f FuncIntArrayConsumer) {
 	lo.ForEach[int](i, f)
+}
+
+func (i StringArray) ForEach(f FuncStringArrayConsumer) {
+	lo.ForEach[string](i, f)
 }
 
 func main() {
 	test := IntArray{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	test.
-		Map(funcMultiple2).
-		Map(funcMultiple2).
-		ForEach(funcPrintInt)
-}
-
-func funcMultiple2(i, _ int) int {
-	return i * 2
-}
-
-func funcPrintInt(i, _ int) {
-	fmt.Println(i)
+		Map(fn.FuncMultiple2).
+		Map(fn.FuncMultiple2).
+		ToStringList().
+		ForEach(fn.FuncPrintString)
 }
