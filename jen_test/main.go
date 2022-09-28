@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/dave/jennifer/jen"
+	"log"
 	"os"
 )
 
@@ -25,7 +26,7 @@ func save(buf *bytes.Buffer, f *jen.File) {
 	} else {
 		fmt.Println(buf.String())
 		if err := os.WriteFile("./jen_test/test/generated.go", buf.Bytes(), 0644); err != nil {
-			panic(err)
+			log.Panicln(err)
 		}
 	}
 }
