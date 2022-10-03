@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import lo "github.com/samber/lo"
 
-func main() {
-	fmt.Println("Hello, world")
+type IntArray []int
+type FuncIntArray func(int, int) int
+type FuncIntArrayConsumer func(int, int)
+
+func (i IntArray) Map(f FuncIntArray) IntArray {
+	return lo.Map[int, int](i, f)
+}
+func (i IntArray) ForEach(f FuncIntArrayConsumer) {
+	lo.Map[int, int](i, f)
 }

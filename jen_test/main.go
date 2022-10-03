@@ -10,9 +10,31 @@ import (
 
 func main() {
 	f := jen.NewFile("main")
-	f.Func().Id("main").Params().Block(
-		jen.Qual("fmt", "Println").Call(jen.Lit("Hello, world")),
+
+	f.Type().Id("IntArray").Index().Int()
+	f.Type().Id("FuncIntArray").Func().Params(jen.Int(), jen.Int()).Int()
+	f.Type().Id("FuncIntArrayConsumer").Func().Params(jen.Int(), jen.Int())
+
+	f.
+		Func().Params(jen.Id("i").
+		Id("IntArray")).Id("Map").
+		Params(jen.Id("f").Id("FuncIntArray")).
+		Id("IntArray").Block(
+		jen.Return(
+			jen.Qual("github.com/samber/lo", "Map").
+				Types(jen.Int(), jen.Int()).Call(jen.Id("i"), jen.Id("f")),
+		),
 	)
+
+	f.
+		Func().Params(jen.Id("i").
+		Id("IntArray")).Id("ForEach").
+		Params(jen.Id("f").Id("FuncIntArrayConsumer")).
+		Block(
+			jen.Qual("github.com/samber/lo", "Map").
+				Types(jen.Int(), jen.Int()).Call(jen.Id("i"), jen.Id("f")),
+		)
+
 	buf := &bytes.Buffer{}
 
 	save(buf, f)
