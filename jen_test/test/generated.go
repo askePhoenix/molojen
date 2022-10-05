@@ -1,4 +1,4 @@
-package main
+package stream
 
 import (
 	fn "github.com/askePhoenix/molojen/lo_test/fn"

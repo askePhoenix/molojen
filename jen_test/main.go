@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	f := jen.NewFile("main")
+	f := jen.NewFile("stream")
 
 	f.Type().Id("IntArray").Index().Int()
 	f.Type().Id("FuncIntArray").Func().Params(jen.Int(), jen.Int()).Int()
