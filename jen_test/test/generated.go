@@ -1,8 +1,8 @@
 package stream
 
 import (
-	fn "github.com/askePhoenix/molojen/lo_test/fn"
-	lo "github.com/samber/lo"
+	"github.com/askePhoenix/molojen/lo_test/fn"
+	"github.com/samber/lo"
 )
 
 type IntArray []int
